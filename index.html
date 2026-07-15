@@ -4,90 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Invitation & RSVP</title>
-    <style>
-        /* Basic mobile-responsive styling */
-        body {
-            font-family: sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 500px; /* Limits width on desktop */
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box; /* Ensures padding doesn't break layout */
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <!-- This single line handles 90% of your mobile-friendly design automatically -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/nw.css">
 </head>
 <body>
 
-<div class="container">
-    <h2>You're Invited!</h2>
-    <p>Insert your highly informative event details here (Date, Time, Location, Community guidelines).</p>
-    
-    <hr>
+    <header>
+        <h1>✨ Exclusive Community Gathering</h1>
+        <p>Join us for an evening of networking, design talks, and community building.</p>
+    </header>
 
-    <h3>RSVP Confirmation</h3>
-    <form id="rsvpForm">
-        <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="phone">Mobile Phone (WhatsApp)</label>
-            <input type="tel" id="phone" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="instagram">Instagram Account</label>
-            <input type="text" id="instagram" placeholder="@username" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="attendance">Will you attend?</label>
-            <select id="attendance" required>
-                <option value="">Select an option</option>
-                <option value="Yes">Yes, I'll be there!</option>
-                <option value="No">Sorry, I can't make it</option>
-            </select>
-        </div>
-        
-        <button type="submit">Submit RSVP</button>
-    </form>
-</div>
+    <main>
+        <!-- Event Info Columns -->
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px;">
+            <div>
+                <h3>📅 Date & Time</h3>
+                <p>Saturday, August 15, 2026<br>18:00 - 21:00 WIB</p>
+            </div>
+            <div>
+                <h3>📍 Location</h3>
+                <p><strong>The Design Hub Co.</strong><br>Sudirman, Central Jakarta</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- RSVP Form -->
+        <section>
+            <h2>Confirm Your Attendance</h2>
+            <form id="rsvpForm">
+                <p>
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required style="width: 100%;">
+                </p>
+                <p>
+                    <label for="phone">Mobile Phone (WhatsApp)</label>
+                    <input type="tel" id="phone" placeholder="0812..." required style="width: 100%;">
+                </p>
+                <p>
+                    <label for="instagram">Instagram Account</label>
+                    <input type="text" id="instagram" placeholder="@username" required style="width: 100%;">
+                </p>
+                <p>
+                    <label for="attendance">Will you attend?</label>
+                    <select id="attendance" required style="width: 100%;">
+                        <option value="">Select an option</option>
+                        <option value="Yes">Yes, I'll be there!</option>
+                        <option value="No">Sorry, I can't make it</option>
+                    </select>
+                </p>
+                <button type="submit" style="width: 100%; padding: 12px; font-weight: bold;">Submit RSVP</button>
+            </form>
+        </section>
+    </main>
 
 <script>
+    // Paste your exact Google Apps Script Web App URL below
     const scriptURL = 'YOUR_GOOGLE_WEB_APP_URL_HERE';
     const form = document.getElementById('rsvpForm');
 
@@ -103,14 +75,12 @@
 
         fetch(scriptURL, {
             method: 'POST',
-            mode: 'no-cors', // Solves cross-origin issues for simple scripts
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         })
         .then(() => {
-            alert('Thank you! Your RSVP has been submitted.');
+            alert('Awesome! Your RSVP has been recorded.');
             form.reset();
         })
         .catch(error => console.error('Error!', error.message));
