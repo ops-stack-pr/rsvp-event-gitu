@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Invitation & RSVP</title>
+    <style>
+        /* Basic mobile-responsive styling */
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px; /* Limits width on desktop */
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box; /* Ensures padding doesn't break layout */
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>You're Invited!</h2>
+    <p>Insert your highly informative event details here (Date, Time, Location, Community guidelines).</p>
+    
+    <hr>
+
+    <h3>RSVP Confirmation</h3>
+    <form id="rsvpForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Mobile Phone (WhatsApp)</label>
+            <input type="tel" id="phone" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="instagram">Instagram Account</label>
+            <input type="text" id="instagram" placeholder="@username" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="attendance">Will you attend?</label>
+            <select id="attendance" required>
+                <option value="">Select an option</option>
+                <option value="Yes">Yes, I'll be there!</option>
+                <option value="No">Sorry, I can't make it</option>
+            </select>
+        </div>
+        
+        <button type="submit">Submit RSVP</button>
+    </form>
+</div>
+
+<script>
+    const scriptURL = 'YOUR_GOOGLE_WEB_APP_URL_HERE';
+    const form = document.getElementById('rsvpForm');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        
+        const data = {
+            name: document.getElementById('name').value,
+            phone: document.getElementById('phone').value,
+            instagram: document.getElementById('instagram').value,
+            attendance: document.getElementById('attendance').value
+        };
+
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors', // Solves cross-origin issues for simple scripts
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            alert('Thank you! Your RSVP has been submitted.');
+            form.reset();
+        })
+        .catch(error => console.error('Error!', error.message));
+    });
+</script>
+
+</body>
+</html>
